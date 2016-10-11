@@ -192,11 +192,11 @@ public class FocusLogic {
 
         int m, n;
         if (isHorizontal) {
-            m = iconLayout.getCountX();
+            m = iconLayout.getCountX() + 1;
             n = iconLayout.getCountY() + hotseatLayout.getCountY();
         } else {
             m = iconLayout.getCountX() + hotseatLayout.getCountX();
-            n = iconLayout.getCountY();
+            n = iconLayout.getCountY() + 1;
         }
         int[][] matrix = createFullMatrix(m, n);
 

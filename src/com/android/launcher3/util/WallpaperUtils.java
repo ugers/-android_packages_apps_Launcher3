@@ -110,7 +110,7 @@ public final class WallpaperUtils {
 
             // We need to ensure that there is enough extra space in the wallpaper
             // for the intended parallax effects
-            final int defaultWidth, defaultHeight;
+            /*final int defaultWidth, defaultHeight;
             if (res.getConfiguration().smallestScreenWidthDp >= 720) {
                 defaultWidth = (int) (maxDim * wallpaperTravelToScreenWidthRatio(maxDim, minDim));
                 defaultHeight = maxDim;
@@ -118,7 +118,8 @@ public final class WallpaperUtils {
                 defaultWidth = Math.max((int) (minDim * WALLPAPER_SCREENS_SPAN), maxDim);
                 defaultHeight = maxDim;
             }
-            sDefaultWallpaperSize = new Point(defaultWidth, defaultHeight);
+            sDefaultWallpaperSize = new Point(defaultWidth, defaultHeight);*/
+            sDefaultWallpaperSize = new Point(maxDim, minDim);
         }
         return sDefaultWallpaperSize;
     }

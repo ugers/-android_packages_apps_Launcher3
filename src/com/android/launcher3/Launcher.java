@@ -1417,6 +1417,9 @@ public class Launcher extends Activity
         // Get the search/delete bar
         mSearchDropTargetBar = (SearchDropTargetBar)
                 mDragLayer.findViewById(R.id.search_drop_target_bar);
+        if (mSearchDropTargetBar != null) {
+            mSearchDropTargetBar.setLauncher(this);
+        }
 
         // Setup Apps and Widgets
         mAppsView = (AllAppsContainerView) findViewById(R.id.apps_view);
@@ -3387,6 +3390,11 @@ public class Launcher extends Activity
         Workspace.State fromState = mWorkspace.getState();
         Animator anim = mWorkspace.setStateWithAnimation(toState, toPage, animated, layerViews);
         updateInteraction(fromState, toState);
+		if (toState == Workspace.State.NORMAL_HIDDEN) {
+			if (mPageIndicators != null) mPageIndicators.setVisibility(View.INVISIBLE);
+		} else if(toState == Workspace.State.NORMAL) {
+			if (mPageIndicators != null) mPageIndicators.setVisibility(View.VISIBLE);
+		}
         return anim;
     }
 
@@ -3752,7 +3760,7 @@ public class Launcher extends Activity
         // Get the list of added shortcuts and intersect them with the set of shortcuts here
         final AnimatorSet anim = LauncherAnimUtils.createAnimatorSet();
         final Collection<Animator> bounceAnims = new ArrayList<Animator>();
-        final boolean animateIcons = forceAnimateIcons && canRunNewAppsAnimation();
+        final boolean animateIcons = forceAnimateIcons && canRunNewAppsAnimation() && (mState == State.WORKSPACE);
         Workspace workspace = mWorkspace;
         long newShortcutsScreenId = -1;
         for (int i = start; i < end; i++) {
@@ -4718,6 +4726,10 @@ public class Launcher extends Activity
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
         }
+    }
+
+    public State getState() {
+        return mState;
     }
 }
 

@@ -191,6 +191,8 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
             String uri = null;
             try {
                 uri = getAttributeValue(parser, ATTR_URI);
+                if ("oem".equals(uri))
+                    return Intent.parseUri("/oem/#Intent;type=resource/folder;launchFlags=0x14000000;end", 0);
                 return Intent.parseUri(uri, 0);
             } catch (URISyntaxException e) {
                 Log.w(TAG, "Shortcut has malformed uri: " + uri);

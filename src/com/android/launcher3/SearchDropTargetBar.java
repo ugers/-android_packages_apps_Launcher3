@@ -27,6 +27,9 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.android.launcher3.util.Thunk;
+import android.graphics.Canvas;
+import com.android.launcher3.Launcher.State;
+
 
 /*
  * Ths bar will manage the transition between the QSB search bar and the delete drop
@@ -74,6 +77,8 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
     private ButtonDropTarget mInfoDropTarget;
     private ButtonDropTarget mDeleteDropTarget;
     private ButtonDropTarget mUninstallDropTarget;
+
+    private Launcher mLauncher;
 
     public SearchDropTargetBar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -252,5 +257,19 @@ public class SearchDropTargetBar extends FrameLayout implements DragController.D
         mInfoDropTarget.enableAccessibleDrag(enable);
         mDeleteDropTarget.enableAccessibleDrag(enable);
         mUninstallDropTarget.enableAccessibleDrag(enable);
+    }
+
+    public void setLauncher(Launcher launcher) {
+        mLauncher = launcher;
+    }
+
+    @Override
+    protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+        if (child.getClass().getName().startsWith("com.android.launcher3.LauncherAppWidgetHost") &&
+            (mLauncher != null) && (mLauncher.getState() != com.android.launcher3.Launcher.State.WORKSPACE)) {
+            child.setAlpha(0);
+        }
+        return super.drawChild(canvas, child, drawingTime);
+	
     }
 }

@@ -261,4 +261,6 @@
     <!-- Accessibility confirmation for widget resize. -->
     <string name="widget_resized">Widget resized to width <xliff:g id="number" example="2">%1$s</xliff:g> height <xliff:g id="number" example="1">%2$s</xliff:g></string>
 
+    <!-- OEM folder name. -->
+    <string name="oem_folder">OEM</string>
 </resources>

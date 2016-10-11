@@ -44,6 +44,8 @@ import com.android.launcher3.util.Thunk;
 
 import java.util.ArrayList;
 
+import com.android.launcher3.Launcher.State;
+
 /**
  * A ViewGroup that coordinates dragging across its descendants
  */
@@ -934,6 +936,9 @@ public class DragLayer extends InsettableFrameLayout {
     }
 
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+        if ((child instanceof PageIndicator) && (mLauncher != null) && (mLauncher.getState() != State.WORKSPACE)) {
+            child.setAlpha(0);
+        }
         boolean ret = super.drawChild(canvas, child, drawingTime);
 
         // We want to draw the page hints above the workspace, but below the drag view.

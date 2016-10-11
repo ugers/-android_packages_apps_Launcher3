@@ -629,7 +629,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
             if (lp.cellHSpan < 0) lp.cellHSpan = mCountX;
             if (lp.cellVSpan < 0) lp.cellVSpan = mCountY;
 
-            child.setId(childId);
+            child.setId(childId + 1000);
             mShortcutsAndWidgets.addView(child, index, lp);
 
             if (markCells) markCellsAsOccupiedForView(child);
